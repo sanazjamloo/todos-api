@@ -1,2 +1,2 @@
-class Todo < applicationRecord
+class Todo < ApplicationRecord
 end
