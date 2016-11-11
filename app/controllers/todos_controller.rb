@@ -1,10 +1,9 @@
 class TodosController < ApplicationController
 
-  #POST /todo
+  # POST /todo
   def create
     todo = Todo.new(todo_params)
     puts(todo_params)
-  end
     if todo.save
       # render json: todo, status: :created, location: todo
       render json: {status:200, message:"Created"}
@@ -23,6 +22,16 @@ class TodosController < ApplicationController
   def show
     todo = Todo.find(params[:id])
     render json: {status: 200, todo: todo}
+  end
+
+  #PATCH/PUT /todos/1
+  def update
+    todo = Todo.find(params[:id])
+    if todo.update(todo_params)
+      render json: todo
+    else
+      render json: {status:422, todo: todo.errors}
+    end
   end
 
 
@@ -53,3 +62,4 @@ class TodosController < ApplicationController
     def todo_params
       params.required(:todo).permit(:description, :done, :created_at, :updated_at)
     end
+end
