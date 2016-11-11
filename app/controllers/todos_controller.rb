@@ -34,24 +34,12 @@ class TodosController < ApplicationController
     end
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#DELETE /todo/1
+  def destroy
+    todo = Todo.find(params[:id])
+    todo.destroy
+    render json: {status: 204, message:"Deleted"}
+  end
 
 
 
